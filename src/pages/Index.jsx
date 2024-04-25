@@ -6,8 +6,10 @@ const Index = () => {
   const [score, setScore] = useState({ player1: 0, player2: 0 });
   const canvasRef = useRef(null);
 
+  const [gameInterval, setGameInterval] = useState(null);
+
   const startGame = () => {
-    setIsPlaying.on();
+    const framesPerSecond = 30;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     let ballX = canvas.width / 2;
@@ -75,11 +77,11 @@ const Index = () => {
       ctx.fill();
     };
 
-    const framesPerSecond = 30;
-    setInterval(() => {
+    setGameInterval(setInterval(() => {
       moveEverything();
       drawEverything();
-    }, 1000 / framesPerSecond);
+    }, 1000 / framesPerSecond));
+    setIsPlaying.on();
   };
 
   useEffect(() => {
@@ -92,7 +94,14 @@ const Index = () => {
     <Flex direction="column" align="center" justify="center" h="100vh">
       <Text fontSize="4xl" mb="8">Welcome to Pong Game</Text>
       <canvas ref={canvasRef} width="600" height="400" style={{ background: "black" }}></canvas>
-      <Button mt="4" colorScheme="teal" onClick={isPlaying ? () => setIsPlaying.off() : startGame}>
+      <Button mt="4" colorScheme="teal" onClick={() => {
+        if (isPlaying) {
+          clearInterval(gameInterval);
+          setIsPlaying.off();
+        } else {
+          startGame();
+        }
+      }}>
         {isPlaying ? "Pause Game" : "Start Game"}
       </Button>
       <Text mt="4">Score: Player 1 - {score.player1} | Player 2 - {score.player2}</Text>
