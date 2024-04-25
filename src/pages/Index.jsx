@@ -106,7 +106,8 @@ const Index = () => {
         if (isPlaying) {
           clearInterval(gameInterval);
           setIsPlaying.off();
-          document.removeEventListener("keydown", keyDownHandler); // Ensure key handler is removed on pause
+          const cleanup = startGame(); // Call cleanup function when pausing
+          cleanup();
         } else {
           startGame();
         }
