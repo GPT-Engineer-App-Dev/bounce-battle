@@ -69,9 +69,6 @@ const Index = () => {
       ctx.beginPath();
       ctx.arc(ballX, ballY, 10, 0, Math.PI * 2, true);
       ctx.fill();
-
-      ctx.font = "16px Arial";
-      ctx.fillText(`Score: Player 1 - ${score.player1} | Player 2 - ${score.player2}`, canvas.width / 2 - 100, 20);
     };
 
     const framesPerSecond = 30;
