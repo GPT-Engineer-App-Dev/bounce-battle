@@ -1,5 +1,5 @@
-import { Box, Flex, Button, Text, useBoolean, useState } from "@chakra-ui/react";
-import { useRef, useEffect } from "react";
+import { Box, Flex, Button, Text, useBoolean } from "@chakra-ui/react";
+import { useRef, useEffect, useState } from "react";
 
 const Index = () => {
   const [isPlaying, setIsPlaying] = useBoolean(false);
