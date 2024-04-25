@@ -41,9 +41,9 @@ const Index = () => {
       if (ballY < 0 || ballY > canvas.height) {
         ballSpeedY = -ballSpeedY;
       }
-      if (ballX <= paddleWidth && ballY > paddle1Y && ballY < paddle1Y + paddleHeight) {
+      if (ballX - 10 <= paddleWidth && ballY >= paddle1Y && ballY <= paddle1Y + paddleHeight) {
         ballSpeedX = -ballSpeedX;
-      } else if (ballX >= canvas.width - paddleWidth && ballY > paddle2Y && ballY < paddle2Y + paddleHeight) {
+      } else if (ballX + 10 >= canvas.width - paddleWidth && ballY >= paddle2Y && ballY <= paddle2Y + paddleHeight) {
         ballSpeedX = -ballSpeedX;
       } else if (ballX < 0) {
         ballSpeedX = -ballSpeedX;
