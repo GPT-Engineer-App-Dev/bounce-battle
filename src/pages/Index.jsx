@@ -82,11 +82,19 @@ const Index = () => {
       drawEverything();
     }, 1000 / framesPerSecond));
     setIsPlaying.on();
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
   };
 
   useEffect(() => {
     if (isPlaying) {
-      startGame();
+      const cleanup = startGame();
+      return () => {
+        clearInterval(gameInterval);
+        cleanup();
+      };
     }
   }, [isPlaying]);
 
@@ -98,6 +106,8 @@ const Index = () => {
         if (isPlaying) {
           clearInterval(gameInterval);
           setIsPlaying.off();
+          const cleanup = startGame(); // Call cleanup function when pausing
+          cleanup();
         } else {
           startGame();
         }
