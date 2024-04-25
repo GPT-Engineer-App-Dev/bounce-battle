@@ -12,8 +12,8 @@ const Index = () => {
     const ctx = canvas.getContext("2d");
     let ballX = canvas.width / 2;
     let ballY = canvas.height / 2;
-    let ballSpeedX = 2;
-    let ballSpeedY = 2;
+    let ballSpeedX = 4;
+    let ballSpeedY = 4;
     let paddle1Y = 150;
     let paddle2Y = 150;
     const paddleHeight = 100;
