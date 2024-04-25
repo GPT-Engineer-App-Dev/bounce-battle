@@ -17,6 +17,17 @@ const Index = () => {
     let paddle2Y = 150;
     const paddleHeight = 100;
     const paddleWidth = 10;
+    const paddleSpeed = 30;
+
+    const keyDownHandler = (e) => {
+      if (e.key === "ArrowUp") {
+        paddle2Y = Math.max(paddle2Y - paddleSpeed, 0);
+      } else if (e.key === "ArrowDown") {
+        paddle2Y = Math.min(paddle2Y + paddleSpeed, canvas.height - paddleHeight);
+      }
+    };
+
+    document.addEventListener("keydown", keyDownHandler);
 
     const moveEverything = () => {
       ballX += ballSpeedX;
@@ -25,8 +36,14 @@ const Index = () => {
       if (ballY < 0 || ballY > canvas.height) {
         ballSpeedY = -ballSpeedY;
       }
-      if (ballX < 0 || ballX > canvas.width) {
+      if (ballX < 0) {
         ballSpeedX = -ballSpeedX;
+        ballX = canvas.width / 2;
+        ballY = canvas.height / 2;
+      } else if (ballX > canvas.width) {
+        ballSpeedX = -ballSpeedX;
+        ballX = canvas.width / 2;
+        ballY = canvas.height / 2;
       }
     };
 
@@ -60,8 +77,8 @@ const Index = () => {
     <Flex direction="column" align="center" justify="center" h="100vh">
       <Text fontSize="4xl" mb="8">Welcome to Pong Game</Text>
       <canvas ref={canvasRef} width="600" height="400" style={{ background: "black" }}></canvas>
-      <Button mt="4" colorScheme="teal" onClick={isPlaying ? undefined : startGame}>
-        {isPlaying ? "Game is running..." : "Start Game"}
+      <Button mt="4" colorScheme="teal" onClick={isPlaying ? () => setIsPlaying.off() : startGame}>
+        {isPlaying ? "Pause Game" : "Start Game"}
       </Button>
     </Flex>
   );
