@@ -1,10 +1,10 @@
-import { Box, Flex, Button, Text, useBoolean } from "@chakra-ui/react";
+import { Box, Flex, Button, Text, useBoolean, useState } from "@chakra-ui/react";
 import { useRef, useEffect } from "react";
 
 const Index = () => {
   const [isPlaying, setIsPlaying] = useBoolean(false);
-  const canvasRef = useRef(null);
   const [score, setScore] = useState({ player1: 0, player2: 0 });
+  const canvasRef = useRef(null);
 
   const startGame = () => {
     setIsPlaying.on();
