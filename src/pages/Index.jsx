@@ -8,12 +8,8 @@ const Index = () => {
 
   const [gameInterval, setGameInterval] = useState(null);
 
-    const startGame = () => {
-      setGameInterval(setInterval(() => {
-        moveEverything();
-        drawEverything();
-      }, 1000 / framesPerSecond));
-    setIsPlaying.on();
+  const startGame = () => {
+    const framesPerSecond = 30;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     let ballX = canvas.width / 2;
@@ -81,11 +77,11 @@ const Index = () => {
       ctx.fill();
     };
 
-    const framesPerSecond = 30;
     setGameInterval(setInterval(() => {
       moveEverything();
       drawEverything();
     }, 1000 / framesPerSecond));
+    setIsPlaying.on();
   };
 
   useEffect(() => {
