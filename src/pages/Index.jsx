@@ -71,8 +71,7 @@ const Index = () => {
       ctx.fill();
 
       ctx.font = "16px Arial";
-      ctx.fillText(`Player 1: ${score.player1}`, 100, 20);
-      ctx.fillText(`Player 2: ${score.player2}`, canvas.width - 150, 20);
+      ctx.fillText(`Score: Player 1 - ${score.player1} | Player 2 - ${score.player2}`, canvas.width / 2 - 100, 20);
     };
 
     const framesPerSecond = 30;
