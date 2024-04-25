@@ -35,7 +35,6 @@ const Index = () => {
     };
 
     document.addEventListener("keydown", keyDownHandler);
-    return () => document.removeEventListener("keydown", keyDownHandler);
 
     const moveEverything = () => {
       ballX += ballSpeedX;
@@ -83,11 +82,19 @@ const Index = () => {
       drawEverything();
     }, 1000 / framesPerSecond));
     setIsPlaying.on();
+
+    return () => {
+      document.removeEventListener("keydown", keyDownHandler);
+    };
   };
 
   useEffect(() => {
-    if (!isPlaying) {
-      startGame();
+    if (isPlaying) {
+      const cleanup = startGame();
+      return () => {
+        clearInterval(gameInterval);
+        cleanup();
+      };
     }
   }, [isPlaying]);
 
